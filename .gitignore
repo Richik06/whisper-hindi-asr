@@ -1,0 +1,66 @@
+# ── Virtual Environment ───────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.so
+
+# ── Audio files (too large for GitHub) ───────────────────────────────────────
+data/raw/*.wav
+data/raw/*.mp3
+data/processed/clips/*.wav
+data/processed/clips/
+
+# ── Model weights (too large for GitHub) ─────────────────────────────────────
+models/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.h5
+
+# ── HuggingFace cache ─────────────────────────────────────────────────────────
+data/hf_dataset/
+.cache/
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+logs/
+*.log
+runs/
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── VS Code ───────────────────────────────────────────────────────────────────
+.vscode/
+*.code-workspace
+
+# ── OS files ──────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Environment variables ─────────────────────────────────────────────────────
+.env
+.env.local
+*.env
+
+# ── Temporary files ───────────────────────────────────────────────────────────
+*.tmp
+*.temp
+*.bak
+~$*
+

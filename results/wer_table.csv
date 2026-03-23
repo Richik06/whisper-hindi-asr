@@ -1,0 +1,3 @@
+Model,Training Data,Test Set,WER (%),CER (%),WER Improvement
+openai/whisper-small (baseline),None (zero-shot),Hindi test set,134.05,95.95,-
+whisper-small (fine-tuned),~10h Josh Talks Hindi,Hindi test set,37.67,18.77,↓ 96.38%

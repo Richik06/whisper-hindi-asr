@@ -1,0 +1,51 @@
+﻿word,system_label,actual_label,system_correct,error_found,original_reason
+तक,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+ए_आई,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+पकड़,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+रम,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+समझकर,incorrect spelling,incorrect spelling,✓,No clear error — system classification accepted,Longer Devanagari word lacks vowel structure — possible spelling error
+बचन,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+कछ,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+-धीरे,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+गबन,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+पदक,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+तरप,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+सचसच,incorrect spelling,incorrect spelling,✓,No clear error — system classification accepted,Longer Devanagari word lacks vowel structure — possible spelling error
+सोच-सोच,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+सुबह-शाम,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+बलत,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+दोस्त-दोस्त,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+हम-हमारे,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+टककर,incorrect spelling,incorrect spelling,✓,No clear error — system classification accepted,Longer Devanagari word lacks vowel structure — possible spelling error
+एम_एस_,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+रेस्पॉन्सिबिलिटी,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+बोलिए_बोलिए,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+मसब,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+हरड़,incorrect spelling,incorrect spelling,✓,No clear error — system classification accepted,Longer Devanagari word lacks vowel structure — possible spelling error
+टगल,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+रवड,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+प्रियारिप्रायोरिटी,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+बी_ज_एम_आई,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+पारामपारी-के,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+-कहाँ,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+एच_डी_वगैरह,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+छोटों-छोटों,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+बलस,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+ऑल__,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+एम_अस,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+हटा-घटा,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+करकरकर,incorrect spelling,incorrect spelling,✓,No clear error — system classification accepted,Longer Devanagari word lacks vowel structure — possible spelling error
+परप,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+परय,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+-सभी,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+जो_जोब,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+धत,correct spelling,correct spelling,✓,No clear error — system classification accepted,"Short Devanagari word without clear vowel — could be abbreviation, needs review"
+सु-सुख,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+फिज-फिजिकल,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+सं-संचालन,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+मोडी-डिमोटीवेट,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+तो-तो,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+रिस्पॉन्सिबिलिटीज़,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+सिस्टेनिम्प्लिटी,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+आ-अकेले,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended
+इट्स-ओके,correct spelling,correct spelling,✓,No clear error — system classification accepted,Unclassified token — manual review recommended

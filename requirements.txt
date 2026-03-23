@@ -1,0 +1,28 @@
+# ── Core ML ───────────────────────────────────────────────────────────────────
+torch>=2.1.0
+torchaudio>=2.1.0
+transformers>=4.37.0
+datasets>=2.16.0
+accelerate>=0.26.0
+evaluate>=0.4.1
+
+# ── Audio processing ──────────────────────────────────────────────────────────
+librosa>=0.10.1
+soundfile>=0.12.1
+audiomentations>=0.33.0     # for augmentation in fix
+silero-vad                  # for better segmentation fix
+
+# ── Metrics ───────────────────────────────────────────────────────────────────
+jiwer>=3.0.3                # WER/CER backend used by evaluate
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+requests>=2.31.0
+tqdm>=4.66.0
+pandas>=2.0.0
+numpy>=1.24.0
+
+# ── Optional: better Roman→Devanagari transliteration ────────────────────────
+indic-transliteration>=2.3.39
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+tensorboard>=2.14.0

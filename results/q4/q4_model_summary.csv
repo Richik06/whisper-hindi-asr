@@ -1,0 +1,7 @@
+﻿model,avg_standard_wer,avg_lattice_wer,avg_improvement,segments_helped,total_segments
+model_H,0.0331,0.0136,0.0195,10,46
+model_i,0.0061,0.0,0.0061,3,46
+model_k,0.0995,0.0325,0.067,22,46
+model_l,0.0989,0.024,0.0749,28,46
+model_m,0.1896,0.0245,0.1651,38,46
+model_n,0.1007,0.0269,0.0739,26,46

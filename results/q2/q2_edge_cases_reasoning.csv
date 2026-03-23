@@ -1,0 +1,12 @@
+﻿category,input,output,decision,reasoning
+Number - Correct Conversion,दस साल पहले मैं वहाँ गया था,10 साल पहले मैं वहाँ गया था,CONVERT,दस=10. Genuine numeric quantity (10 years). Duration expressions are always converted.
+Number - Correct Conversion,तीन सौ चौवन लोग थे,354 लोग थे,CONVERT,तीन(3)×सौ(100)+चौवन(54)=354. Compound number — genuine count of people.
+Number - Correct Conversion,पच्चीस रुपये दिए,25 रुपये दिए,CONVERT,पच्चीस=25. Monetary amount — always a genuine numeric quantity.
+Number - Correct Conversion,एक हज़ार पाँच सौ रुपये,1500 रुपये,CONVERT,एक हज़ार(1000)+पाँच सौ(500)=1500. Large compound monetary value.
+Number - Correct Conversion,नब्बे प्रतिशत लोग सहमत हैं,90 प्रतिशत लोग सहमत हैं,CONVERT,नब्बे=90. Percentage value — numeric measurement.
+Edge Case - KEPT AS-IS,दो-चार बातें करनी थी मुझे,दो-चार बातें करनी थी मुझे,KEEP,दो-चार is a frozen idiom meaning 'a few things'. Hyphen signals idiomatic usage. Converting to '2-4 बातें' destroys the meaning. Rule: hyphenated number pairs are always kept.
+Edge Case - KEPT AS-IS,एक बार फिर से समझाओ,एक बार फिर से समझाओ,KEEP,एक बार = 'once more' — temporal idiom. Converting to '1 बार' sounds unnatural. Pattern 'एक/दो/तीन बार' is always kept as-is.
+Edge Case - JUDGMENT CALL,एक दूसरे का ख्याल रखो,एक दूसरे का ख्याल रखो,KEEP,"एक दूसरे = 'each other' — completely idiomatic, no numeric meaning. Converting एक→1 gives '1 दूसरे' which is meaningless."
+English - Devanagari Borrowing,मेरा इंटरव्यू बहुत अच्छा गया,मेरा [EN]इंटरव्यू[/EN] बहुत अच्छा गया,TAG,इंटरव्यू='interview'. English word in Devanagari — correct spelling per guidelines. Tagged for downstream handling (TTS/translation/NER).
+English - Devanagari Borrowing,नेटवर्क का इशू है,[EN]नेटवर्क[/EN] का इशू है,TAG,"नेटवर्क='network'. Common English tech word. Devanagari spelling is correct — tagged for identification, not as error."
+English - Roman Code-switching,मेरा interview अच्छा गया,मेरा [EN]interview[/EN] अच्छा गया,TAG,'interview' in Roman script = code-switching in ASR output. Should be 'इंटरव्यू' per guidelines. Tagged and flagged for correction.
