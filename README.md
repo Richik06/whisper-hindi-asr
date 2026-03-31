@@ -1,6 +1,6 @@
 # Hindi ASR Pipeline —   Fine Tuned OpenAI Whisper-small
 
-Complete solution for all 4 questions: Hindi ASR fine-tuning, ASR post-processing pipeline, Hindi spell checking, and lattice-based WER evaluation.
+Hindi ASR fine-tuning, ASR post-processing pipeline, Hindi spell checking, and lattice-based WER evaluation.
 
 ---
 
