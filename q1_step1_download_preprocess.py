@@ -15,7 +15,7 @@ from tqdm import tqdm
 import soundfile as sf
 import librosa
 
-# ── Config ────────────────────────────────────────────────────────────────────
+#Config
 DATA_DIR      = Path("data/raw")
 PROCESSED_DIR = Path("data/processed")
 TARGET_SR     = 16_000
@@ -104,7 +104,7 @@ def clean_text(text):
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
-# ── Step 1: Download ──────────────────────────────────────────────────────────
+# Download
 print("=" * 60)
 print("STEP 1: Downloading files")
 print("=" * 60)
@@ -120,7 +120,7 @@ for (folder_id, rec_id, _) in tqdm(MANIFEST, desc="Downloading"):
     else:    dl["trans_fail"] += 1
 print(f"Download summary: {dl}")
 
-# ── Step 2: Slice and save clips ──────────────────────────────────────────────
+# Slice and save clips 
 print("\n" + "=" * 60)
 print("STEP 2: Slicing into utterance clips")
 print("=" * 60)
@@ -179,7 +179,7 @@ print(f"Total clips: {len(rows)}  |  Skipped: {skipped}")
 total_hrs = sum(r["duration"] for r in rows) / 3600
 print(f"Total audio: {total_hrs:.2f} hrs")
 
-# ── Step 3: Save manifests ────────────────────────────────────────────────────
+# Save manifests
 print("\n" + "=" * 60)
 print("STEP 3: Saving train/val manifest CSVs")
 print("=" * 60)

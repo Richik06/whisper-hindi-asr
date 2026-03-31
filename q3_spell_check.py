@@ -1,6 +1,5 @@
 """
 Q3: Hindi Spell Checking on ~1,77,000 Unique Words
-====================================================
 Downloads word list from Google Sheet, classifies each word,
 outputs confidence scores and reasoning.
 """
@@ -14,9 +13,8 @@ from io import StringIO
 RESULTS_DIR = Path("results/q3")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # STEP 1: Download ALL words from Google Sheet
-# ══════════════════════════════════════════════════════════════════════════════
 print("=" * 60)
 print("STEP 1: Downloading word list from Google Sheet")
 print("=" * 60)
@@ -44,14 +42,12 @@ unique_words = [w for w in unique_words
 print(f"Unique words loaded: {len(unique_words)}")
 print(f"Sample: {unique_words[:10]}")
 
-# ══════════════════════════════════════════════════════════════════════════════
 # STEP 2: CLASSIFICATION ENGINE
-# ══════════════════════════════════════════════════════════════════════════════
 print("\n" + "=" * 60)
 print("STEP 2: Classification engine")
 print("=" * 60)
 
-# ── Whitelists ────────────────────────────────────────────────────────────────
+# ── Whitelists 
 COMMON_HINDI = {
     "है","हैं","था","थी","थे","हो","हूं","हूँ","होगा","होगी","होंगे","होना",
     "का","की","के","को","से","में","पर","और","या","तो","भी","ही","न","ना",
@@ -130,7 +126,7 @@ ENGLISH_DEVANAGARI = {
     "मिस्टेक","एरर","बग","फिक्स","सॉल्व","डिबग","कोड","प्रोग्राम",
 }
 
-# ── Unicode helpers ───────────────────────────────────────────────────────────
+# ── Unicode helpers 
 MATRA_RANGE = set(range(0x093E, 0x094E))
 HALANT      = 0x094D
 ANUSVARA    = 0x0902
@@ -182,7 +178,7 @@ def has_proper_vowel_structure(w):
             return True
     return False
 
-# ── NEW: Tokenization error detection ────────────────────────────────────────
+# ── NEW: Tokenization error detection 
 def has_tokenization_error(w):
     """
     Detect words that are actually tokenization errors:
@@ -224,7 +220,7 @@ def classify_word(word):
     if not w:
         return "incorrect spelling", "high", "Empty token"
 
-    # ── DEFINITE CORRECT ──────────────────────────────────────────────────────
+    # ── DEFINITE CORRECT 
     if w in COMMON_HINDI:
         return ("correct spelling", "high",
                 "Verified common Hindi word — in curated whitelist")
@@ -241,12 +237,12 @@ def classify_word(word):
         return ("correct spelling", "medium",
                 "Roman script word — English code-switching, treated as correct")
 
-    # ── TOKENIZATION ERRORS (NEW) ─────────────────────────────────────────────
+    # ── TOKENIZATION ERRORS (NEW) 
     is_tok_err, tok_reason = has_tokenization_error(w)
     if is_tok_err:
         return ("incorrect spelling", "high", tok_reason)
 
-    # ── DEFINITE INCORRECT ────────────────────────────────────────────────────
+    # ── DEFINITE INCORRECT 
     if is_only_matra(w):
         return ("incorrect spelling", "high",
                 "Single vowel matra as standalone token — impossible in correct Devanagari")
@@ -279,7 +275,7 @@ def classify_word(word):
         return ("incorrect spelling", "medium",
                 f"Unusually long word ({len(w)} chars) — likely concatenation error")
 
-    # ── MEDIUM CONFIDENCE CORRECT ─────────────────────────────────────────────
+    # ── MEDIUM CONFIDENCE CORRECT 
     if re.match(r'^[\u0900-\u097F]+$', w) and has_proper_vowel_structure(w):
         if 4 <= len(w) <= 15:
             return ("correct spelling", "medium",
@@ -304,9 +300,8 @@ def classify_word(word):
             "Unclassified token — manual review recommended")
 
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # STEP 3: CLASSIFY ALL WORDS
-# ══════════════════════════════════════════════════════════════════════════════
 print(f"\nClassifying {len(unique_words)} words ...")
 
 results = []
@@ -335,9 +330,9 @@ print(f"  High confidence     : {high_c}")
 print(f"  Medium confidence   : {med_c}")
 print(f"  Low confidence      : {low_c}")
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # STEP 4: REVIEW 40-50 LOW CONFIDENCE WORDS (Q3c)
-# ══════════════════════════════════════════════════════════════════════════════
+
 print("\n" + "=" * 60)
 print("STEP 4: Low confidence review (Q3c)")
 print("=" * 60)
@@ -421,9 +416,8 @@ Analysis: What this tells us about system breakdown:
   - Short ambiguous words (2-3 chars) are genuinely hard without a dictionary
 """)
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # STEP 5: UNRELIABLE CATEGORIES (Q3d)
-# ══════════════════════════════════════════════════════════════════════════════
 print("=" * 60)
 print("STEP 5: Unreliable categories (Q3d)")
 print("=" * 60)
@@ -456,9 +450,8 @@ these 'low' confidence even though correct for that dialect.
 Fix: Use native_state from metadata.json for dialect-specific word lists.
 """)
 
-# ══════════════════════════════════════════════════════════════════════════════
 # STEP 6: SAVE OUTPUTS
-# ══════════════════════════════════════════════════════════════════════════════
+
 print("=" * 60)
 print("STEP 6: Saving outputs")
 print("=" * 60)

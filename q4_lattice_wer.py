@@ -1,6 +1,6 @@
 """
 Q4: Lattice-based WER Evaluation
-==================================
+
 Data: 46 audio segments with Human reference + 5 model transcriptions
 Models: H, i, k, l, m, n (6 total including Model H which is closest to Human)
 
@@ -23,9 +23,9 @@ import requests
 RESULTS_DIR = Path("results/q4")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # STEP 1: Load data from Google Sheet
-# ══════════════════════════════════════════════════════════════════════════════
+
 print("=" * 60)
 print("STEP 1: Loading Q4 data from Google Sheet")
 print("=" * 60)
@@ -54,9 +54,8 @@ df = df.fillna("")
 MODEL_COLS = ["model_H","model_i","model_k","model_l","model_m","model_n"]
 print(f"Segments: {len(df)}")
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # STEP 2: TEXT NORMALIZATION
-# ══════════════════════════════════════════════════════════════════════════════
 def normalize(text):
     """
     Normalize text for fair comparison:
@@ -79,9 +78,8 @@ def normalize(text):
     words = [w.strip() for w in text.split() if w.strip()]
     return words
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # STEP 3: STANDARD WER COMPUTATION
-# ══════════════════════════════════════════════════════════════════════════════
 def edit_distance(ref, hyp):
     """Compute word-level edit distance (insertions, deletions, substitutions)."""
     n, m = len(ref), len(hyp)
@@ -105,9 +103,9 @@ def wer(ref_words, hyp_words):
         return 0.0 if not hyp_words else 1.0
     return edit_distance(ref_words, hyp_words) / len(ref_words)
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # STEP 4: LATTICE CONSTRUCTION
-# ══════════════════════════════════════════════════════════════════════════════
+
 """
 ALIGNMENT UNIT CHOICE: WORD
 Justification:
@@ -235,9 +233,9 @@ def build_lattice(human_words, model_outputs):
 
     return lattice, trusted_ref, ref_corrections
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # STEP 5: LATTICE-BASED WER
-# ══════════════════════════════════════════════════════════════════════════════
+
 def lattice_wer(lattice, hyp_words):
     """
     Compute WER using lattice as reference instead of flat string.
@@ -279,9 +277,8 @@ def lattice_wer(lattice, hyp_words):
 
     return dp[n][m] / n
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # STEP 6: COMPUTE ALL WERs
-# ══════════════════════════════════════════════════════════════════════════════
 print("\n" + "=" * 60)
 print("STEP 6: Computing Standard WER and Lattice WER")
 print("=" * 60)
@@ -330,9 +327,8 @@ for idx, row in df.iterrows():
 results_df     = pd.DataFrame(results)
 corrections_df = pd.DataFrame(all_corrections) if all_corrections else pd.DataFrame()
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # STEP 7: ANALYSIS & SUMMARY
-# ══════════════════════════════════════════════════════════════════════════════
 print("\n" + "=" * 60)
 print("STEP 7: Results")
 print("=" * 60)
@@ -374,9 +370,7 @@ print(f"\nModel most helped by lattice: {best_model}")
 unchanged = model_summary[model_summary["avg_improvement"] < 0.001]
 print(f"Models effectively unchanged: {list(unchanged['model'])}")
 
-# ══════════════════════════════════════════════════════════════════════════════
 # STEP 8: THEORY EXPLANATION
-# ══════════════════════════════════════════════════════════════════════════════
 print("\n" + "=" * 60)
 print("STEP 8: Theory and Design Decisions")
 print("=" * 60)
@@ -426,9 +420,7 @@ EXPECTED RESULTS:
   - Models that omit filler words (हम्म, अ) not in the spoken content
 """)
 
-# ══════════════════════════════════════════════════════════════════════════════
 # STEP 9: SAVE OUTPUTS
-# ══════════════════════════════════════════════════════════════════════════════
 results_df.to_csv(RESULTS_DIR / "q4_wer_results.csv",
                   index=False, encoding="utf-8-sig")
 model_summary.to_csv(RESULTS_DIR / "q4_model_summary.csv",

@@ -14,7 +14,7 @@ from tqdm import tqdm
 from transformers import WhisperForConditionalGeneration, WhisperProcessor
 import evaluate
 
-# ── Config ────────────────────────────────────────────────────────────────────
+# ── Config 
 PROCESSED_DIR = Path("data/processed")
 RESULTS_DIR   = Path("results/q2")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -22,9 +22,7 @@ TARGET_SR     = 16_000
 DEVICE        = "cuda" if torch.cuda.is_available() else "cpu"
 wer_metric    = evaluate.load("wer")
 
-# ══════════════════════════════════════════════════════════════════════════════
 # STEP 1: Generate raw ASR using baseline whisper-small
-# ══════════════════════════════════════════════════════════════════════════════
 print("=" * 60)
 print("STEP 1: Generating raw ASR with baseline whisper-small")
 print("=" * 60)
@@ -76,9 +74,8 @@ sample_df["raw_asr"]   = raw_asr_outputs
 sample_df["reference"] = sample_df["text"]
 print(f"Done. {len(sample_df)} raw ASR outputs generated.")
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # STEP 2a: NUMBER NORMALIZATION
-# ══════════════════════════════════════════════════════════════════════════════
 ONES = {
     "शून्य":0,"एक":1,"दो":2,"तीन":3,"चार":4,"पाँच":5,"पांच":5,
     "छह":6,"छः":6,"सात":7,"आठ":8,"नौ":9,"दस":10,"ग्यारह":11,
@@ -159,9 +156,8 @@ sample_df["number_norm_reasoning"] = sample_df.apply(
     ), axis=1
 )
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # STEP 2b: ENGLISH WORD DETECTION
-# ══════════════════════════════════════════════════════════════════════════════
 ENGLISH_DEVANAGARI = {
     "इंटरनेट","मोबाइल","फोन","लैपटॉप","कंप्यूटर","वीडियो","ऑडियो",
     "ऐप","ऑनलाइन","यूट्यूब","इंस्टाग्राम","फेसबुक","व्हाट्सएप",
