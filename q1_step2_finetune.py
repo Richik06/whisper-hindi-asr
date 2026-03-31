@@ -24,14 +24,14 @@ from transformers import (
 )
 import evaluate
 
-# ── Config ────────────────────────────────────────────────────────────────────
+# Config 
 PROCESSED_DIR = Path("data/processed")
 MODEL_ID      = "openai/whisper-small"
 OUTPUT_DIR    = Path("models/whisper-small-hindi")
 TARGET_SR     = 16_000
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# ── Custom PyTorch Dataset ─────────────────────────────────────────────────────
+# Custom PyTorch Dataset 
 class HindiASRDataset(TorchDataset):
     def __init__(self, manifest_csv, processor):
         self.df        = pd.read_csv(manifest_csv)
@@ -62,8 +62,7 @@ class HindiASRDataset(TorchDataset):
 
         return {"input_features": input_features, "labels": labels}
 
-# ── Data collator ──────────────────────────────────────────────────────────────
-@dataclass
+# Data collator
 class DataCollatorSpeechSeq2SeqWithPadding:
     processor: Any
     decoder_start_token_id: int
@@ -85,7 +84,7 @@ class DataCollatorSpeechSeq2SeqWithPadding:
         batch["labels"] = labels
         return batch
 
-# ── Encoder freeze/unfreeze ───────────────────────────────────────────────────
+# Encoder freeze/unfreeze 
 def set_encoder_grad(m, requires_grad):
     for p in m.model.encoder.parameters():
         p.requires_grad = requires_grad
@@ -100,7 +99,7 @@ class UnfreezeEncoderCallback(TrainerCallback):
             self.done = True
             print(f"\nEncoder unfrozen at step {state.global_step}")
 
-# ── Load processor and model ──────────────────────────────────────────────────
+# Load processor and model
 print("Loading processor ...")
 processor = WhisperProcessor.from_pretrained(
     MODEL_ID, language="Hindi", task="transcribe"
@@ -118,7 +117,7 @@ model.config.use_cache = False
 model.gradient_checkpointing_enable()
 set_encoder_grad(model, False)
 
-# ── Build datasets ─────────────────────────────────────────────────────────────
+# Build datasets 
 print("Building train dataset ...")
 train_dataset = HindiASRDataset(PROCESSED_DIR / "train_manifest.csv", processor)
 print(f"  Train samples: {len(train_dataset)}")
@@ -132,7 +131,7 @@ data_collator = DataCollatorSpeechSeq2SeqWithPadding(
     decoder_start_token_id=model.config.decoder_start_token_id,
 )
 
-# ── Metrics ────────────────────────────────────────────────────────────────────
+# Metrics
 wer_metric = evaluate.load("wer")
 cer_metric = evaluate.load("cer")
 
@@ -148,7 +147,7 @@ def compute_metrics(pred):
     cer = 100 * cer_metric.compute(predictions=pred_str, references=label_str)
     return {"wer": round(wer, 2), "cer": round(cer, 2)}
 
-# ── Training arguments ─────────────────────────────────────────────────────────
+#  Training arguments 
 training_args = Seq2SeqTrainingArguments(
     output_dir                  = str(OUTPUT_DIR),
     per_device_train_batch_size = 8,
@@ -178,7 +177,7 @@ training_args = Seq2SeqTrainingArguments(
     label_names                 = ["labels"],
 )
 
-# ── Trainer ────────────────────────────────────────────────────────────────────
+# Trainer 
 trainer = Seq2SeqTrainer(
     model           = model,
     args            = training_args,
@@ -192,7 +191,7 @@ trainer = Seq2SeqTrainer(
     ],
 )
 
-# ── Resume from checkpoint if exists (so we don't lose step 1-500 progress) ───
+# Resume from checkpoint if exists (so we don't lose step 1-500 progress)
 import os
 checkpoints = [
     os.path.join(str(OUTPUT_DIR), d)
@@ -205,7 +204,7 @@ if resume_from:
 else:
     print("\nStarting fresh training ...")
 
-# ── Train ──────────────────────────────────────────────────────────────────────
+# ── Train 
 print("\n" + "=" * 60)
 print("Starting fine-tuning ...")
 print(f"  Device       : {training_args.device}")
@@ -218,7 +217,7 @@ print("=" * 60 + "\n")
 
 trainer.train(resume_from_checkpoint=resume_from)
 
-# ── Save ───────────────────────────────────────────────────────────────────────
+# ── Save 
 final_path = OUTPUT_DIR / "final"
 trainer.save_model(str(final_path))
 processor.save_pretrained(str(final_path))

@@ -12,13 +12,13 @@ import evaluate
 RESULTS_DIR = Path("results")
 wer_metric  = evaluate.load("wer")
 
-# ── Load predictions ──────────────────────────────────────────────────────────
+# ── Load predictions 
 df = pd.read_csv(RESULTS_DIR / "per_utterance_predictions.csv")
 print(f"Total utterances        : {len(df)}")
 print(f"Utterances with errors  : {(df['finetuned_utt_wer'] > 0).sum()}")
 print(f"Perfect transcriptions  : {(df['finetuned_utt_wer'] == 0).sum()}")
 
-# ── (d) Stratified sampling ───────────────────────────────────────────────────
+# ── (d) Stratified sampling
 errors_df = df[df["finetuned_utt_wer"] > 0].copy().reset_index(drop=True)
 
 def severity_bin(wer):
@@ -47,7 +47,7 @@ print(f"\nStratified sample size  : {len(sampled)} utterances")
 print(sampled["severity"].value_counts())
 sampled.to_csv(RESULTS_DIR / "sampled_errors.csv", index=False)
 
-# ── (e) Error taxonomy ────────────────────────────────────────────────────────
+# ── (e) Error taxonomy
 def classify_error(ref, hyp):
     ref, hyp = str(ref), str(hyp)
     ref_words = ref.split()
@@ -145,7 +145,7 @@ for cat, count in cat_counts.most_common():
         print(f"    HYP : {row['finetuned_hyp']}")
         print(f"    WER : {row['finetuned_utt_wer']}%  [{row['severity']}]")
 
-# ── (f) Top-3 fixes ───────────────────────────────────────────────────────────
+# ── (f) Top-3 fixes 
 top3 = [c for c, _ in cat_counts.most_common(3)]
 
 FIXES = {
@@ -189,7 +189,7 @@ for i, cat in enumerate(top3, 1):
     print(f"\nTop-{i}: {cat.upper()}")
     print(FIXES.get(cat, "  No fix defined."))
 
-# ── (g) Implement Fix: Roman script post-processing ───────────────────────────
+# ── (g) Implement Fix: Roman script post-processing
 print("\n" + "=" * 60)
 print("(g) IMPLEMENTING FIX: Roman Script Post-processing")
 print("=" * 60)

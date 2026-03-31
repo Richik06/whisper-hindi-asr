@@ -17,7 +17,7 @@ from transformers import (
 )
 import evaluate
 
-# ── Config ────────────────────────────────────────────────────────────────────
+# ── Config
 FINETUNED_DIR = Path("models/whisper-small-hindi/final")
 RESULTS_DIR   = Path("results")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -30,7 +30,7 @@ cer_metric = evaluate.load("cer")
 
 print(f"Device: {DEVICE}")
 
-# ── Try loading test set (FLEURS first, fallback to Common Voice) ─────────────
+# ── Try loading test set (FLEURS first, fallback to Common Voice) 
 def load_hindi_test_set():
     # Try 1: FLEURS with updated API
     try:
@@ -111,7 +111,7 @@ test_ds, text_col = load_hindi_test_set()
 references = [str(s).strip() for s in test_ds[text_col]]
 print(f"\nTotal test references: {len(references)}")
 
-# ── Helper: transcribe ────────────────────────────────────────────────────────
+# ── Helper: transcribe 
 def transcribe_all(model_path, label):
     print(f"\n{'='*60}")
     print(f"EVALUATING: {label}")
@@ -162,7 +162,7 @@ def transcribe_all(model_path, label):
     torch.cuda.empty_cache()
     return hypotheses
 
-# ── Evaluate ──────────────────────────────────────────────────────────────────
+# ── Evaluate 
 baseline_hyps  = transcribe_all("openai/whisper-small", "Baseline whisper-small")
 finetuned_hyps = transcribe_all(FINETUNED_DIR,          "Fine-tuned whisper-small")
 
@@ -172,7 +172,7 @@ finetuned_wer = round(100 * wer_metric.compute(predictions=finetuned_hyps, refer
 finetuned_cer = round(100 * cer_metric.compute(predictions=finetuned_hyps, references=references), 2)
 wer_imp       = round(baseline_wer - finetuned_wer, 2)
 
-# ── Print table ───────────────────────────────────────────────────────────────
+# ── Print table 
 print("\n" + "=" * 60)
 print("FINAL RESULTS TABLE")
 print("=" * 60)
@@ -199,7 +199,7 @@ print(table.to_string(index=False))
 table.to_csv(RESULTS_DIR / "wer_table.csv", index=False)
 print(f"\n✅ Saved to results/wer_table.csv")
 
-# ── Per-utterance predictions ─────────────────────────────────────────────────
+# ── Per-utterance predictions 
 def utt_wer(ref, hyp):
     try:
         return round(100 * wer_metric.compute(predictions=[hyp], references=[ref]), 2)
